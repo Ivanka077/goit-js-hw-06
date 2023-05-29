@@ -22,26 +22,34 @@
 
 // Створи функцію destroyBoxes(), яка очищає вміст div#boxes, у такий спосіб видаляючи всі створені елементи.
 
-const divIdEl = document.querySelector('#controls');
-const inputEl = divIdEl.querySelector('input');
-const btnCreate = divIdEl.querySelector('button[data-create]');
-const btnDestroy = divIdEl.querySelector('button[data-destroy]');
+
+const inputEl = document.querySelector('input');
+const btnCreate = document.querySelector('button[data-create]');
+const btnDestroy = document.querySelector('button[data-destroy]');
 const idBox = document.querySelector('#boxes');
 
-btnCreate.addEventListener('click', () => createBoxes(inputEl.value));
-btnDestroy.addEventListener('click', destroyBoxes);
 
+btnCreate.addEventListener('click', onCreateBtnClick);
+btnDestroy.addEventListener('click', onDestroyBtnClick);
+
+function onCreateBtnClick(event) {
+  createBoxes(inputEl.value);
+}
+
+function onDestroyBtnClick(event) {
+  destroyBoxes();
+}
 
 function createBoxes(amount) {
-  amount = Number(amount);
+  
   const boxes = [];
   for (let i = 0; i < amount; i++) {
     const size = 30 + i * 10;
     const color = getRandomHexColor();
 
    const createDivEl = document.createElement('div');
-    createDivEl.style.width = '${size}px';
-    createDivEl.style.height = '${size}px';
+    createDivEl.style.width = `${size}px`;
+    createDivEl.style.height = `${size}px`;
     createDivEl.style.backgroundColor = color; 
 
     boxes.push(createDivEl);
